@@ -22,7 +22,7 @@
   <section id="panel" hidden>
     <label for="topic">Topic</label>
     <select id="topic"></select>
-    <label for="file">File (PDF, Word, PowerPoint, Excel, image, text; max 4 MB)</label>
+    <label for="file">File (PDF, Word, PowerPoint, Excel, image, text; max 500 MB)</label>
     <input id="file" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xlsx,.png,.jpg,.jpeg,.txt">
     <button class="primary wide" id="upload">Upload file</button>
     <h2 style="margin-top:2rem">Files in this topic</h2>
@@ -33,6 +33,6 @@
   <p id="msg" role="status"></p>
 </main>
 <script src="questions.js"></script>
-<script src="admin.js"></script>
+<script type="module" src="admin.js"></script>
 </body>
 </html>

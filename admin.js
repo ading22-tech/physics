@@ -1,3 +1,4 @@
+import { upload } from './blob-client.js';
 const $ = s => document.querySelector(s);
 let pw = '';
 const say = (t, bad) => { const m = $('#msg'); m.textContent = t; m.className = bad ? 'err' : 'ok'; };
@@ -42,11 +43,31 @@ $('#unlock').onclick = async () => {
   refresh();
 };
 $('#topic').onchange = refresh;
+const MAX = 500 * 1024 * 1024;
+const slug = t => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const clean = n => n.replace(/[^\w.\- ]+/g, '_').replace(/^\.+/, '').slice(0, 100);
 $('#upload').onclick = async () => {
   const f = $('#file').files[0];
   if (!f) { say('Choose a file first.', true); return; }
-  if (f.size > 4 * 1024 * 1024) { say('That file is over 4 MB. Compress it first.', true); return; }
-  say('Uploading...');
-  const r = await api('/api/upload?topic=' + encodeURIComponent($('#topic').value) + '&name=' + encodeURIComponent(f.name), { method: 'POST', body: f });
-  if (r.ok) { say('Uploaded ' + f.name); $('#file').value = ''; refresh(); } else say(await errOf(r), true);
+  if (f.size > MAX) { say('That file is over 500 MB.', true); return; }
+  const btn = $('#upload');
+  btn.disabled = true;
+  say('Uploading... 0%');
+  try {
+    await upload('files/' + slug($('#topic').value) + '/' + clean(f.name), f, {
+      access: 'public',
+      handleUploadUrl: '/api/upload',
+      headers: { 'x-admin-password': pw },
+      multipart: f.size > 20 * 1024 * 1024,
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      onUploadProgress: p => say('Uploading... ' + Math.round(p.percentage) + '%')
+    });
+    say('Uploaded ' + f.name);
+    $('#file').value = '';
+    refresh();
+  } catch (e) {
+    say(e.message || 'Upload failed.', true);
+  }
+  btn.disabled = false;
 };
