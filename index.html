@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics Reviewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <section id="home" class="view">
+    <h1>Physics Reviewer</h1>
+    <p class="lead">Practice questions for freshmen. Pick a topic, answer, and read why each answer is right.</p>
+    <div id="topics" class="topics"></div>
+  </section>
+
+  <section id="topic" class="view" hidden>
+    <div class="bar"><button class="link" id="topic-back">All topics</button></div>
+    <h1 id="topic-name" class="small"></h1>
+    <div class="topics">
+      <button class="topic" id="open-module"><div>Read the module</div><span id="module-meta"></span></button>
+      <button class="topic" id="open-quiz"><div>Take the quiz</div><span id="quiz-meta"></span></button>
+    </div>
+  </section>
+
+  <section id="module" class="view" hidden>
+    <div class="bar"><button class="link" id="module-back">Back to topic</button></div>
+    <h1 id="module-title" class="small"></h1>
+    <div id="lesson"></div>
+    <button class="primary wide" id="module-quiz">Test yourself with the quiz</button>
+  </section>
+
+  <section id="quiz" class="view" hidden>
+    <div class="bar"><button class="link" id="quit">Back to topic</button><span id="count"></span></div>
+    <div class="progress"><div id="fill"></div></div>
+    <h2 id="question"></h2>
+    <div id="options" class="options"></div>
+    <div id="feedback" class="feedback" hidden></div>
+    <button class="primary" id="next" hidden>Next question</button>
+  </section>
+
+  <section id="result" class="view" hidden>
+    <h2 id="score"></h2>
+    <p id="verdict" class="lead"></p>
+    <div id="missed"></div>
+    <div class="actions">
+      <button class="primary" id="retry-missed" hidden>Retry missed questions</button>
+      <button id="again">Try this topic again</button>
+      <button id="home-btn">Back to topic</button>
+    </div>
+  </section>
+</main>
+<script src="questions.js"></script>
+<script src="modules.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Admin · Physics Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1 class="small">Admin</h1>
+
+  <section id="login">
+    <p class="lead">Enter the admin password to upload files for your students.</p>
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autocomplete="current-password">
+    <button class="primary wide" id="unlock">Unlock</button>
+  </section>
+
+  <section id="panel" hidden>
+    <label for="topic">Topic</label>
+    <select id="topic"></select>
+    <label for="file">File (PDF, Word, PowerPoint, Excel, image, text; max 4 MB)</label>
+    <input id="file" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xlsx,.png,.jpg,.jpeg,.txt">
+    <button class="primary wide" id="upload">Upload file</button>
+    <h2 style="margin-top:2rem">Files in this topic</h2>
+    <div id="files"></div>
+    <p><a href="index.html">Back to the reviewer</a></p>
+  </section>
+
+  <p id="msg" role="status"></p>
+</main>
+<script src="questions.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
